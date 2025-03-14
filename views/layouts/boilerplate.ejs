@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= typeof title !== 'undefined' ? title : "Movie Booking App" %></title>
+    <!-- FontAwesome (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col bg-gray-100">
+<body class="min-h-screen flex flex-col bg-gradient-to-r from-blue-200 via-purple-300 to-pink-200">
 
     <%- include("../includes/navbar.ejs") %> 
     <%- include("../includes/flash.ejs") %>
-    <main class="flex-1 container min-h-screen mx-auto mt-8 px-4">
-        <%- body %> <!-- Correct Dynamic Page Content -->
+    <main class="flex-1 flex items-center justify-center px-4">
+        <%- body %> 
     </main>
 
     <%- include("../includes/footer.ejs") %>

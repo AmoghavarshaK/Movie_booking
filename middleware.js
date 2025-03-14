@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const db = require("./dbconfig")
 require("dotenv").config();
 
 // Middleware to check if the user is logged in
@@ -24,9 +25,11 @@ module.exports.isLoggedIn = async (req, res, next) => {
         req.user = users[0]; // Store full user info in req.user
         next();
     } catch (err) {
+        console.error("JWT Verification Error:", err.message); // Debugging
         req.flash("error", "Session expired. Please log in again.");
         return res.redirect("/login");
     }
+    
 };
 
 // Middleware to save redirect URL after login

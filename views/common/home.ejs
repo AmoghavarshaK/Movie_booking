@@ -1,4 +1,7 @@
 <% layout("layouts/boilerplate") %>
 
 <div>This is homepage <% if (currUser) { %> <%= currUser.username %> <% } %> </div>
-<div>User role is <% if (currUser) { %> <%= currUser.role %> <% } %> </div>
+<div>User role is <% if (currUser &&  currUser.role === "admin" ) { %> 
+    <a href="/admin/dashboard">go to admin dashboard </a>
+     <% } %> 
+</div>

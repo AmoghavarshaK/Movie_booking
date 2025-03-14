@@ -7,6 +7,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 const userRouter = require("./routes/user")
+const adminRouter = require("./routes/admin")
 
 const session = require('express-session');
 const flash = require('connect-flash')
@@ -69,9 +70,12 @@ app.use((req,res,next)=>{
     next();
 })
 
-
+app.use('/admin',adminRouter)
 app.use('/',userRouter)
 
+app.get('/about' ,(req ,res)=>{
+    res.render("./common/about.ejs") 
+});
 app.get('/' ,(req ,res)=>{
     res.render("./common/home.ejs");
 })

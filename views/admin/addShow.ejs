@@ -1,0 +1,41 @@
+<% layout("layouts/boilerplate") %>
+<body>
+    <form action="/admin/shows/add" method="POST">
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto mt-10">
+            <h2 class="text-xl font-semibold mb-4 text-center">Add New Show</h2>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Select Movie:</label>
+                <select name="movie_id" class="w-full px-3 py-2 border rounded-lg" required>
+                    <option value="" disabled selected>Select a Movie</option>
+                    <% movies.forEach(movie => { %>
+                        <option value="<%= movie.movie_id %>"><%= movie.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Select Venue:</label>
+                <select name="venue_id" class="w-full px-3 py-2 border rounded-lg" required>
+                    <option value="" disabled selected>Select a Venue</option>
+                    <% venues.forEach(venue => { %>
+                        <option value="<%= venue.venue_id %>"><%= venue.vname %> - <%= venue.location %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Start Time:</label>
+                <input type="datetime-local" name="start_time" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Ticket Price:</label>
+                <input type="number" name="price" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400" required>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-full">Add Show</button>
+        </div>
+    </form>
+</body>
+</html>

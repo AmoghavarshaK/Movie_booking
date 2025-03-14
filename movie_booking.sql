@@ -13,7 +13,7 @@ CREATE TABLE venues(
 	venue_id INT AUTO_INCREMENT PRIMARY KEY,
     vname VARCHAR(255) NOT NULL ,
     location VARCHAR(255) NOT NULL,
-    capacity INT NOT NULL
+    capacity INT NOT NULL DEFAULT 50
 );
 
 CREATE TABLE movies(
@@ -63,6 +63,7 @@ CREATE TABLE booked_seats (
 );
 ALTER TABLE venues DROP COLUMN capacity;
 ALTER TABLE venues ADD COLUMN capacity INT NOT NULL DEFAULT 50;
-select * from user;
+
+select * from shows;
 DESC VENUES;
     

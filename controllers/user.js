@@ -57,8 +57,12 @@ module.exports.loginUser = async (req, res) => {
 
         // Store token in cookie
         res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+        
+        const redirectUrl = req.session.redirectUrl;
+        delete req.session.redirectUrl; // Clear it after use
+
         req.flash("success", "Login successful!");
-        res.redirect("/");
+        res.redirect(redirectUrl || "/");
     } catch (error) {
         console.error(error);
         req.flash("error", "Something went wrong!");

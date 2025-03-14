@@ -1,84 +1,58 @@
-<footer class="bg-gray-800 text-white py-8">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Logo and Description -->
-            <div>
-                <a href="/" class="flex items-center space-x-3">
-                    <img src="images/Logo.webp" alt="Movie Booking Logo"
-                        class="h-12 w-12 rounded-full object-cover border-2 border-cyan-400">
-                    <span class="text-2xl font-semibold text-cyan-400">Movie Booking</span>
-                </a>
-                <p class="mt-4 text-gray-400">
-                    Your go-to platform for booking the latest movies. Experience the magic of cinema!
-                </p>
-            </div>
-
-            <!-- Quick Links -->
-            <div>
-                <h3 class="text-lg font-semibold text-cyan-400 mb-3">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="/" class="hover:text-cyan-300 transition duration-300">Home</a></li>
-                    <li><a href="/about" class="hover:text-cyan-300 transition duration-300">About Us</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact Info -->
-            <div>
-                <h3 class="text-lg font-semibold text-cyan-400 mb-3">Contact Us</h3>
-                <ul class="space-y-2 text-gray-400">
-                    <li>Email: <a href="mailto:support@moviebooking.com"
-                            class="hover:text-cyan-300 transition duration-300">support@moviebooking.com</a></li>
-                    <li>Phone: <a href="tel:+1234567890" class="hover:text-cyan-300 transition duration-300">+91
-                            9535405433</a></li>
-                    <li>Location: Bengaluru, Karnataka, India</li>
-                </ul>
-                <!-- Social Media Icons (Added Here) -->
-                <div class="flex space-x-4 mt-4">
-                    <a href="https://www.facebook.com" target="_blank"
-                        class="text-cyan-400 hover:text-cyan-300 transition duration-300">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="https://www.twitter.com" target="_blank"
-                        class="text-cyan-400 hover:text-cyan-300 transition duration-300">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="https://www.youtube.com" target="_blank"
-                        class="text-cyan-400 hover:text-cyan-300 transition duration-300">
-                        <i class="fab fa-youtube text-xl"></i>
-                    </a>
-                </div>
-            </div>
+<footer class="bg-gray-900 text-white py-4">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:space-x-10">
+        <!-- Logo & Description -->
+        <div class="w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left">
+            <a href="/" class="flex items-center space-x-3">
+                <img src="/images/Logo.webp" alt="Movie Booking Logo" class="h-12 w-12 rounded-full border-2 border-cyan-400 shadow-lg">
+                <span class="text-2xl font-semibold text-cyan-400">Movie Booking</span>
+            </a>
+            <p class="mt-4 text-gray-400 text-sm leading-relaxed">
+                Your ultimate destination for seamless movie ticket booking. Discover new releases, book your seats effortlessly, and enjoy the best of cinema from the comfort of your home! 🎬🍿
+            </p>
         </div>
 
-        <!-- Divider -->
-        <!-- Social Media Icons (Centered) -->
-        <div class="flex justify-center space-x-6 mt-4">
-            <!-- Facebook -->
-            <a href="https://www.facebook.com" target="_blank" class="hover:opacity-80 transition duration-300">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" class="h-8 w-8">
-            </a>
+        <!-- Vertical Divider -->
+        <div class="hidden md:block border-l border-gray-600 h-28"></div>
 
-            <!-- Twitter -->
-            <a href="https://x.com/dbsprojectdil" target="_blank" class="hover:opacity-80 transition duration-300">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter--v1.png" alt="Twitter" class="h-8 w-8">
-            </a>
-
-            <!-- YouTube -->
-            <a href="https://www.youtube.com" target="_blank" class="hover:opacity-80 transition duration-300">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube" class="h-8 w-8">
-            </a>
+        <!-- Quick Links -->
+        <div class="md:pl-[7%] w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left">
+            <h3 class="text-lg font-semibold text-cyan-400 mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+                <li><a href="/" class="text-gray-300 hover:text-cyan-300 transition duration-300">Home</a></li>
+                <li><a href="/about" class="text-gray-300 hover:text-cyan-300 transition duration-300">About Us</a></li>
+            </ul>
         </div>
 
+        <!-- Vertical Divider -->
+        <div class="hidden md:block border-l border-gray-600 h-28"></div>
 
-        </a>
+        <!-- Contact Info -->
+        <div class="w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left">
+            <h3 class="text-lg font-semibold text-cyan-400 mb-4">Contact Us</h3>
+            <ul class="space-y-2 text-gray-400">
+                <li>Email: <a href="mailto:support@moviebooking.com" class="hover:text-cyan-300 transition">support@moviebooking.com</a></li>
+                <li>Phone: <a href="tel:+1234567890" class="hover:text-cyan-300 transition">+91 9535405433</a></li>
+                <li>Location: Bengaluru, Karnataka, India</li>
+            </ul>
+        </div>
     </div>
 
-
-    <!-- Copyright -->
-    <p class="text-gray-500 text-sm mt-4 text-center">
-        &copy; <%= new Date().getFullYear() %> Movie Booking App. All rights reserved.
-    </p>
-    </div>
+    <!-- Divider & Copyright -->
+    <div class="border-t border-gray-700 flex flex-col mx-auto items-center mt-6 pt-4 text-center">
+        <div class="flex space-x-4 mt-1">
+            <a href="https://www.facebook.com" target="_blank" class="text-gray-400 hover:text-cyan-400 transition">
+                <i class="fab fa-facebook-f text-xl"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-cyan-400 transition">
+                <i class="fab fa-twitter text-xl"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="text-gray-400 hover:text-cyan-400 transition">
+                <i class="fab fa-instagram text-xl"></i>
+            </a>
+        </div>
+        <p class="text-gray-500 text-sm mt-2">
+            &copy; <%= new Date().getFullYear() %> Movie Booking App. All rights reserved.
+        </p>
     </div>
 </footer>
 

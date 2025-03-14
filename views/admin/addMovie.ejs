@@ -1,0 +1,75 @@
+<% layout("layouts/boilerplate") %>
+<body>
+    <form action="/admin/movies/add" method="POST">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Title:</label>
+                <input type="text" name="title" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Genre:</label>
+                <select name="genre" class="w-full p-2 border rounded-lg">
+                    <option value="" disabled selected>Select a Genre</option>
+                    <% const genres = ["Comedy", "Action", "Drama", "Thriller", "Horror", "Science Fiction", "Romance"]; %>
+                    <% genres.forEach(function(genre) { %>
+                        <option value="<%= genre.toLowerCase() %>"><%= genre %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Duration (in minutes):</label>
+                <input type="number" name="duration" class="w-full px-3 py-2 border rounded-lg" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Poster URL:</label>
+                <input type="text" name="poster_url" class="w-full px-3 py-2 border rounded-lg" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Release Date:</label>
+                <input type="date" name="release_date" class="w-full px-3 py-2 border rounded-lg" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Language:</label>
+                <input type="text" name="language" class="w-full px-3 py-2 border rounded-lg" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold">Description:</label>
+                <textarea name="description" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400" rows="4" required></textarea>
+            </div>
+
+            <!-- Cast input section -->
+            <div id="cast-container" class="mb-4">
+                <label class="block text-gray-700 font-bold">Cast Members:</label>
+                <div class="flex items-center space-x-2">
+                    <input type="text" name="cast[]" class="w-full p-2 border rounded-md" placeholder="Enter cast name">
+                    <button type="button" class="bg-green-500 text-white px-2 py-1 rounded-md" onclick="addCastInput()">Add More</button>
+                </div>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4">Add Movie</button>
+        </div>
+    </form>
+
+    <script>
+        function addCastInput() {
+            const container = document.getElementById("cast-container");
+            const newInput = document.createElement("div");
+            newInput.classList.add("flex", "items-center", "space-x-2", "mt-2");
+            newInput.innerHTML = `
+                <input type="text" name="cast[]" class="w-full p-2 border rounded-md" placeholder="Enter cast name">
+                <button type="button" class="bg-red-500 text-white px-2 py-1 rounded-md" onclick="removeCastInput(this)">Remove</button>
+            `;
+            container.appendChild(newInput);
+        }
+
+        function removeCastInput(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</body>
