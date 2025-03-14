@@ -61,7 +61,8 @@ CREATE TABLE booked_seats (
     PRIMARY KEY (user_id, show_id, seat_no),
     FOREIGN KEY (user_id, show_id) REFERENCES bookings(user_id, show_id) ON DELETE CASCADE
 );
-
+ALTER TABLE venues DROP COLUMN capacity;
+ALTER TABLE venues ADD COLUMN capacity INT NOT NULL DEFAULT 50;
 select * from user;
-
+DESC VENUES;
     
