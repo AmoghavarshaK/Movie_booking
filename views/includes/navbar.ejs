@@ -1,17 +1,44 @@
 <nav class="bg-gray-900 text-white p-4">
     <div class="container mx-auto flex justify-between items-center">
-        <a href="/" class="text-2xl font-semibold">Movie Booking</a>
-        <div>
-            <ul class="flex space-x-4">
-                <li><a href="/" class="hover:text-gray-300">Home</a></li>
-                <% if (!currUser) { %>
-                    <li><a href="/login" class="hover:text-gray-300">Login</a></li>
-                    <li><a href="/register" class="hover:text-gray-300">Register</a></li>
-                <% } else { %>
-                    <li><a href="/dashboard" class="hover:text-gray-300">Dashboard</a></li>
-                    <li><a href="/logout" class="hover:text-gray-300">Logout</a></li>
-                <% } %>
-            </ul>
-        </div>
+        <!-- Logo + Title -->
+        <a href="/" class="flex items-center space-x-3 text-2xl font-semibold text-cyan-400 hover:text-cyan-300 transition duration-300">
+            <img src="images/Logo.webp" alt="Movie Booking Logo" class="h-12 w-12 rounded-full object-cover border-2 border-cyan-400">
+            <span>Movie Booking</span>
+        </a>
+        
+        <!-- Hamburger Menu (Mobile) -->
+        <button id="menu-toggle" class="md:hidden text-cyan-400 focus:outline-none">
+            ☰
+        </button>
+        
+        <!-- Nav Links -->
+        <ul id="menu" class="hidden md:flex space-x-6">
+            <li>
+                <a href="/" class="hover:text-cyan-300 transition duration-300">Home</a>
+            </li>
+            <% if (!currUser) { %>
+                <li>
+                    <a href="/login" class="hover:text-cyan-300 transition duration-300">Login</a>
+                </li>
+                <li>
+                    <a href="/register" class="hover:text-cyan-300 transition duration-300">Register</a>
+                </li>
+            <% } else { %>
+                <li>
+                    <a href="/dashboard" class="hover:text-cyan-300 transition duration-300">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/logout" class="hover:text-cyan-300 transition duration-300">Logout</a>
+                </li>
+            <% } %>
+        </ul>
     </div>
 </nav>
+
+<!-- JavaScript for Hamburger Menu -->
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+        document.getElementById('menu').classList.toggle('hidden');
+    });
+</script>
+

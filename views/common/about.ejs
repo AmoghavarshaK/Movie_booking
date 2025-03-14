@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Movie Booking App</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+    <!-- Navbar -->
+    <%- include("../includes/navbar.ejs") %>
+
+    <main class="flex-1 container mx-auto mt-12 px-4">
+        <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h1 class="text-3xl font-bold text-cyan-400 mb-4">About Us</h1>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Welcome to <span class="text-cyan-400 font-semibold">Movie Booking</span> – your ultimate destination for booking movie tickets online! 
+                    Our mission is to make movie-watching an effortless and enjoyable experience.
+                </p>
+
+                <h2 class="text-2xl font-semibold text-gray-800 mb-3">Our Story</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Founded in 2025, Movie Booking was created with the vision of simplifying the process of booking movie tickets. 
+                    We believe in the power of cinema to bring people together, and we want to make that experience more accessible and enjoyable for everyone.
+                </p>
+
+                <h2 class="text-2xl font-semibold text-gray-800 mb-3">Contact Us</h2>
+                <p class="text-gray-700 leading-relaxed mb-2">
+                    📧 Email: <a href="mailto:support@moviebooking.com" class="text-cyan-400 hover:text-cyan-300 transition">support@moviebooking.com</a>
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-2">
+                    📞 Phone: <a href="tel:+9535405433" class="text-cyan-400 hover:text-cyan-300 transition">+1 (234) 567-890</a>
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    📍 Location: Bengaluru, Karnataka, India
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include("../includes/footer.ejs") %>
+    
+</body>
+</html>
