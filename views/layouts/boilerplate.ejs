@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : "Movie Booking App" %></title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+    <%- include("../includes/navbar.ejs") %> 
+    <%- include("../includes/flash.ejs") %>
+    <main class="flex-1 container mx-auto mt-8 px-4">
+        <%- body %> <!-- Correct Dynamic Page Content -->
+    </main>
+
+    <%- include("../includes/footer.ejs") %>
+
+</body>
+</html>

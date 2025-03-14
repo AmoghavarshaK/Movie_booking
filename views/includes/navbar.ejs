@@ -1,0 +1,17 @@
+<nav class="bg-gray-900 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-2xl font-semibold">Movie Booking</a>
+        <div>
+            <ul class="flex space-x-4">
+                <li><a href="/" class="hover:text-gray-300">Home</a></li>
+                <% if (!currUser) { %>
+                    <li><a href="/login" class="hover:text-gray-300">Login</a></li>
+                    <li><a href="/register" class="hover:text-gray-300">Register</a></li>
+                <% } else { %>
+                    <li><a href="/dashboard" class="hover:text-gray-300">Dashboard</a></li>
+                    <li><a href="/logout" class="hover:text-gray-300">Logout</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
