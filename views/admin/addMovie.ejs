@@ -11,7 +11,7 @@
                 <label class="block text-gray-700 font-bold">Genre:</label>
                 <select name="genre" class="w-full p-2 border rounded-lg">
                     <option value="" disabled selected>Select a Genre</option>
-                    <% const genres = ["Comedy", "Action", "Drama", "Thriller", "Horror", "Science Fiction", "Romance"]; %>
+                    <% const genres = ["Comedy", "Action", "Drama", "Thriller", "Horror", "Science Fiction"]; %>
                     <% genres.forEach(function(genre) { %>
                         <option value="<%= genre.toLowerCase() %>"><%= genre %></option>
                     <% }); %>

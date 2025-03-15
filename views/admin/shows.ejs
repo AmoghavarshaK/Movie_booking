@@ -1,0 +1,38 @@
+<% layout("layouts/boilerplate") %>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <!-- Manage Shows Header -->
+        <div class="flex justify-between items-center bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-bold">🎬 Manage Shows</h2>
+            <a href="/admin/shows/add" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-md transition duration-300">
+                + Add Show
+            </a>
+        </div>
+
+        <!-- Show List -->
+        <% if (shows.length === 0) { %>
+            <p class="text-gray-600 text-center text-lg">No shows available.</p>
+        <% } else { %>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% shows.forEach((show, index) => { %>
+                    <div class="p-5 rounded-lg shadow-lg transition duration-300 
+                        <% if (index % 2 === 0) { %> bg-white <% } else { %> bg-blue-50 <% } %>">
+                        
+                        <h3 class="text-xl font-bold text-gray-800"><%= show.title %></h3>
+                        <p class="text-gray-700"><strong>📍 Venue:</strong> <%= show.vname %>, <%= show.location %></p>
+                        <p class="text-gray-700"><strong>🕒 Start Time:</strong> <%= new Date(show.start_time).toLocaleString() %></p>
+                        <p class="text-gray-700"><strong>💰 Price:</strong> <span class="text-green-600 font-semibold">₹<%= show.price %></span></p>
+
+                        <!-- Delete Button -->
+                        <form action="/admin/shows/delete/<%= show.show_id %>" method="POST" class="mt-4">
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md transition duration-300">
+                                ❌ Delete Show
+                            </button>
+                        </form>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+</body>

@@ -6,7 +6,9 @@ const {
     addShow, 
     renderAddVenue, 
     renderAddMovie, 
-    renderAddShow 
+    renderAddShow,
+    viewShows,
+    deleteShow
 } = require("../controllers/admin");
 const { isLoggedIn, isAdmin } = require("../middleware");
 
@@ -24,7 +26,9 @@ router.get("/movies/add", isLoggedIn, isAdmin, renderAddMovie);
 router.post("/movies/add", isLoggedIn, isAdmin, addMovie);
 
 // Shows
+router.get("/shows", isLoggedIn, isAdmin, viewShows);
 router.get("/shows/add", isLoggedIn, isAdmin, renderAddShow);
 router.post("/shows/add", isLoggedIn, isAdmin, addShow);
+router.post("/shows/delete/:show_id", isLoggedIn, isAdmin, deleteShow);
 
 module.exports = router;

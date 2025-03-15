@@ -61,5 +61,4 @@ CREATE TABLE booked_seats (
     PRIMARY KEY (user_id, show_id, seat_no),
     FOREIGN KEY (user_id, show_id) REFERENCES bookings(user_id, show_id) ON DELETE CASCADE
 );
-
-    
+select * from movies;

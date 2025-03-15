@@ -1,7 +1,98 @@
 <% layout("layouts/boilerplate") %>
 
-<div>This is homepage <% if (currUser) { %> <%= currUser.username %> <% } %> </div>
-<div>User role is <% if (currUser &&  currUser.role === "admin" ) { %> 
-    <a href="/admin/dashboard">go to admin dashboard </a>
-     <% } %> 
-</div>
+<body class="bg-gray-100 p-6">
+    <div class="container mx-auto">
+
+        <!-- Admin Dashboard Button (Only for Admins) -->
+        <% if (currUser && currUser.role === "admin") { %>
+            <div class="flex justify-center mb-6">
+                <a href="/admin/dashboard" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 text-lg font-semibold">
+                    Go to Admin Dashboard
+                </a>
+            </div>
+        <% } %>
+
+        <h1 class="text-3xl font-bold text-center mb-6">Now Showing</h1>
+
+        <% if (Object.keys(moviesByGenre).length === 0) { %>
+            <p class="text-center text-gray-600">No movies available.</p>
+        <% } else { %>
+            <% Object.keys(moviesByGenre).forEach(genre => { %>
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold mb-4"><%= genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') %></h2>
+
+                    <div class="relative w-full">
+                        <!-- Movie Swiper Carousel -->
+                        <div class="swiper" id="<%= genre %>-swiper">
+                            <div class="swiper-wrapper"> <!-- Removed 'flex justify-center' -->
+                                <% moviesByGenre[genre].forEach(movie => { %>
+                                    <div class="swiper-slide"> <!-- No extra flex wrapping -->
+                                        <a href="/movies/<%= movie.movie_id %>" 
+                                            class="block relative w-64 bg-transparent rounded-lg shadow-xl transition-transform duration-300 ease-out hover:scale-95 hover:shadow-2xl hover:rounded-lg">
+                                             <img src="<%= movie.poster_url %>" 
+                                                  alt="<%= movie.title %>" 
+                                                  class="w-full h-80 object-cover rounded-lg transition-opacity duration-300 hover:opacity-90">
+                                         
+                                             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 rounded-b-lg">
+                                                 <h3 class="text-lg font-bold text-white drop-shadow-lg">
+                                                     <%= movie.title %>
+                                                 </h3>
+                                                 <p class="text-sm text-white bg-black/50 px-2 py-1 inline-block rounded-md mt-1">
+                                                     <%= movie.language %>
+                                                 </p>
+                                             </div>
+                                         </a>                                         
+                                    </div>
+                                <% }); %>
+                            </div>
+
+                            <!-- Swiper Pagination -->
+                            <div class="swiper-pagination"></div>
+
+                            <!-- Swiper Navigation Buttons -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.swiper').forEach(swiperElement => {
+                new Swiper(swiperElement, {
+                    loop: true,  
+                    slidesPerView: "auto", // Auto fits available space
+                    spaceBetween: 15, // Reduce space for smaller screens
+                    navigation: {
+                        nextEl: swiperElement.querySelector(".swiper-button-next"),
+                        prevEl: swiperElement.querySelector(".swiper-button-prev"),
+                    },
+                    pagination: {
+                        el: swiperElement.querySelector(".swiper-pagination"),
+                        clickable: true,
+                        dynamicBullets: true,
+                    },
+                    breakpoints: {
+                        320: { slidesPerView: 1, spaceBetween: 10 },  // 1 movie on small screens
+                        480: { slidesPerView: 1.2, spaceBetween: 12 },
+                        768: { slidesPerView: 2, spaceBetween: 15 },
+                        1024: { slidesPerView: 3, spaceBetween: 20 },
+                        1300: { slidesPerView: 4, spaceBetween: 20 }  // 4 movies on large screens
+                    }
+                });
+            });
+        });
+    </script>
+
+    <style>
+        /* Ensures images & slides fit well */
+        .swiper-slide {
+            max-width: 100%;
+            display: flex; /* Ensures proper alignment */
+            justify-content: center;
+        }
+    </style>
+</body>

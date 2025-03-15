@@ -108,4 +108,32 @@ module.exports.renderAddShow = async (req, res) => {
     }
 };
 
+module.exports.viewShows = async (req, res) => {
+    try {
+        const [shows] = await db.query(`
+            SELECT shows.show_id, movies.title, venues.vname,venues.location, shows.start_time, shows.price
+            FROM shows
+            JOIN movies ON shows.movie_id = movies.movie_id
+            JOIN venues ON shows.venue_id = venues.venue_id
+        `);
+        res.render("admin/shows", { shows });
+    } catch (error) {
+        console.error(error);
+        req.flash("error", "Internal server error");
+        res.redirect("/admin");
+    }
+};
 
+module.exports.deleteShow = async (req, res) => {
+    try {
+        const { show_id } = req.params;
+        await db.query("DELETE FROM shows WHERE show_id = ?", [show_id]);
+
+        req.flash("success", "Show deleted successfully!");
+        res.redirect("/admin/shows");
+    } catch (error) {
+        console.error(error);
+        req.flash("error", "Internal server error");
+        res.redirect("/admin/shows");
+    }
+};

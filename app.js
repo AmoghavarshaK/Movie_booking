@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 
 const userRouter = require("./routes/user")
 const adminRouter = require("./routes/admin")
+const homeRouter = require("./routes/home")
 
 const session = require('express-session');
 const flash = require('connect-flash')
@@ -87,9 +88,7 @@ app.get('/profile', (req, res) => {
 });
 
 
-app.get('/' ,(req ,res)=>{
-    res.render("./common/home.ejs");
-})
+app.use('/',homeRouter);
 
 app.all('*',(req,res,next)=>{
     let error = new Error("Page Not Found");
