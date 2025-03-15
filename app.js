@@ -77,9 +77,15 @@ app.get('/about' ,(req ,res)=>{
     res.render("./common/about.ejs") 
 });
 
-app.get('/profile',(req ,res)=>{
-    res.render("./common/profile.ejs") 
+app.get('/profile', (req, res) => {
+    if (!req.user) {
+        req.flash("error", "You need to log in first.");
+        return res.redirect("/login");
+    }
+
+    res.render("./common/profile", { user: req.user });
 });
+
 
 app.get('/' ,(req ,res)=>{
     res.render("./common/home.ejs");
