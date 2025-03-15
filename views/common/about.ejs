@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us - Movie Booking App</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex flex-col min-h-screen bg-gray-100">
-
-    <!-- Navbar -->
-    <%- include("../includes/navbar.ejs") %>
-
+<% layout("layouts/boilerplate") %>
     <main class="flex-1 container mx-auto mt-12 px-4">
         <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden">
             <div class="p-8">
@@ -49,8 +36,3 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <%- include("../includes/footer.ejs") %>
-    
-</body>
-</html>

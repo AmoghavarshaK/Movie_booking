@@ -76,6 +76,11 @@ app.use('/',userRouter)
 app.get('/about' ,(req ,res)=>{
     res.render("./common/about.ejs") 
 });
+
+app.get('/profile',(req ,res)=>{
+    res.render("./common/profile.ejs") 
+});
+
 app.get('/' ,(req ,res)=>{
     res.render("./common/home.ejs");
 })
