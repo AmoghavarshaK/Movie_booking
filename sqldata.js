@@ -30,7 +30,7 @@ async function initializeData() {
             ('Sathyam Cinemas', 'T Nagar, Chennai', 130)
         `);
 
-        // Insert Movies with multiple languages and genres no. of movies = 32
+        // Insert Movies with multiple languages and genres no. of movies = 40
         await db.query(`
             INSERT INTO movies (title, genre, description, duration, poster_url, relese_date, language) VALUES
             ('Inception', 'science fiction', 'A mind-bending thriller.', 148, 'https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg', '2010-07-16', 'English'),
@@ -72,7 +72,27 @@ async function initializeData() {
             ('Kavaludaari', 'thriller', 'A traffic cop stumbles upon a decades-old case, leading him to uncover dark secrets.', 144, 'https://m.media-amazon.com/images/S/pv-target-images/12da1fdb3de2ee688d784fb09c7548047565087fe0b711abbefabf300e31c2b0.jpg', '2019-04-12', 'Kannada'),
             ('Goodachari', 'thriller', 'An intelligence agent discovers shocking truths about his father and his own identity.', 147, 'https://m.media-amazon.com/images/S/pv-target-images/abc07da34427f951671503171ce9ad4d0256f4d4d90198fabdb5111f6bdd8654.jpg', '2018-08-03', 'Telugu'),
             ('Ratsasan', 'thriller', 'A rookie cop investigates a series of brutal murders targeting young girls.', 170, 'https://m.media-amazon.com/images/M/MV5BMjgzMzMxMzUtNzUyYi00NTkxLWI1NTAtMjZhNmMxMGQ4YjBmXkEyXkFqcGc@._V1_.jpg', '2018-10-05', 'Tamil'),
-            ('Kahaani', 'thriller', 'A pregnant woman searches for her missing husband in Kolkata, uncovering dangerous secrets.', 122, 'https://m.media-amazon.com/images/M/MV5BMTQ1NDI0NzkyOF5BMl5BanBnXkFtZTcwNzAyNzE2Nw@@._V1_.jpg', '2012-03-09', 'Hindi')
+            ('Kahaani', 'thriller', 'A pregnant woman searches for her missing husband in Kolkata, uncovering dangerous secrets.', 122, 'https://m.media-amazon.com/images/M/MV5BMTQ1NDI0NzkyOF5BMl5BanBnXkFtZTcwNzAyNzE2Nw@@._V1_.jpg', '2012-03-09', 'Hindi'),        
+            ('The Hangover', 'comedy', 'Three friends wake up from a bachelor party with no memory of the night and a missing groom.', 100, 'https://m.media-amazon.com/images/M/MV5BMTA0NjE1MzMzODheQTJeQWpwZ15BbWU3MDY4MTQ3Mzk@._V1_.jpg', '2009-06-05', 'English'),
+            ('Superbad', 'comedy', 'Two high school friends try to buy alcohol for a party to impress girls.', 113, 'https://m.media-amazon.com/images/M/MV5BNjk0MzdlZGEtNTRkOC00ZDRiLWJkYjAtMzUzYTRiNzk1YTViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', '2007-08-17', 'English'),
+            ('Jathi Ratnalu', 'comedy', 'Three naive but lovable friends land in trouble after being framed in a political conspiracy.', 148, 'https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/jathi-ratnalu-et00305719-23-02-2021-02-59-47.jpg', '2021-03-11', 'Telugu'),
+            ('F2: Fun and Frustration', 'comedy', 'Two men face hilarious troubles after getting married.', 148, 'https://static.digit.in/OTT/images/f2-fun-and-frustration-5f37f9cc058c2888ecddc4ab.jpg?tr=w-600', '2019-01-12', 'Telugu'),
+            ('Bell Bottom', 'comedy', 'A constable who dreams of becoming a detective gets tangled in a mysterious case.', 130, 'https://m.media-amazon.com/images/M/MV5BMTc4ODA2MjQyMF5BMl5BanBnXkFtZTgwMTY3MDI1NzM@._V1_.jpg', '2019-02-15', 'Kannada'),
+            ('Gaalipata', 'comedy', 'Three friends go to a village and find love while dealing with personal challenges.', 136, 'https://m.media-amazon.com/images/M/MV5BMzc0NTJjMGUtZmVmNi00Njc3LWFhZjEtNDBjNGM2N2EyNzJiXkEyXkFqcGc@._V1_.jpg', '2008-01-18', 'Kannada'),
+            ('Nanban', 'comedy', 'Three engineering students discover the true meaning of life while challenging the system.', 188, 'https://m.media-amazon.com/images/M/MV5BNWY4YThjYzYtNWVhMC00YzZkLWI2ZDktYzAzYzIwNDM5ZjY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', '2012-01-12', 'Tamil'),
+            ('Soodhu Kavvum', 'comedy', 'A group of amateur kidnappers find themselves in trouble after a job goes wrong.', 138, 'https://m.media-amazon.com/images/S/pv-target-images/7b262b892c57e84e3167c7383742df20c470e67eeaf7d17d645749404828c69f.jpg', '2013-05-01', 'Tamil'),
+            ('3 Idiots', 'comedy', 'Two friends search for their long-lost college buddy while reflecting on their college days.', 170, 'https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg', '2009-12-25', 'Hindi'),
+            ('Munna Bhai M.B.B.S.', 'comedy', 'A gangster enrolls in a medical college to fulfill his fathers dream.', 156, 'https://m.media-amazon.com/images/M/MV5BMDE3ZDYzZDctOWJiYS00MTE5LTk0NzgtOThhZTRmZDQ2ZmFjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', '2003-12-19', 'Hindi'),
+            ('The Conjuring', 'horror', 'Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence.', 112, 'https://m.media-amazon.com/images/I/71-rbaiiBkL._AC_UF1000,1000_QL80_.jpg', '2013-07-19', 'English'),
+            ('A Quiet Place', 'horror', 'A family struggles to survive in a world where creatures hunt by sound.', 90, 'https://m.media-amazon.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_FMjpg_UX1000_.jpg', '2018-04-06', 'English'),
+            ('13B', 'horror', 'A man realizes that the events from a TV serial are happening in real life.', 146, 'https://m.media-amazon.com/images/M/MV5BMTY3MTE4MzkxNl5BMl5BanBnXkFtZTcwNzU5ODYzMg@@._V1_.jpg', '2009-03-06', 'Tamil'),
+            ('Pizza', 'horror', 'A pizza delivery boys life changes when he encounters a haunted house.', 127, 'https://m.media-amazon.com/images/M/MV5BNjVjYTEwYmQtMDM1YS00YTQ3LWI4NzMtMGVlNzFhMTJiZGI3XkEyXkFqcGc@._V1_.jpg', '2012-10-19', 'Tamil'),
+            ('Raju Gari Gadhi', 'horror', 'A group of friends encounters paranormal activities in a haunted resort.', 122, 'https://m.media-amazon.com/images/M/MV5BMzExNTM1OTctZWZmOC00ODk1LTlhYTUtNjlkOWM3NDQ1OGI5XkEyXkFqcGc@._V1_QL75_UY281_CR185,0,190,281_.jpg', '2015-10-23', 'Telugu'),
+            ('Avunu', 'horror', 'A couples life takes a dark turn when they move into a haunted house.', 106, 'https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/avunu--telugu--et00011096-24-03-2017-16-31-54.jpg', '2012-09-21', 'Telugu'),
+            ('6-5=2', 'horror', 'A group of friends hiking trip turns into a nightmare when supernatural forces target them.', 103, 'https://upload.wikimedia.org/wikipedia/en/9/99/Sixminusfiveposter.jpg', '2013-11-29', 'Kannada'),
+            ('Insidious', 'horror', 'A family fights to save their son who has become trapped in a dark realm.', 103, 'https://m.media-amazon.com/images/M/MV5BMGExMzQ2NWYtMjk2My00YzczLTk0MGQtYzliNDU3ZjU1NDU1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', '2010-09-14', 'English'),
+            ('Raaz', 'horror', 'A couples life is threatened by a dark spirit haunting their house.', 151, 'https://m.media-amazon.com/images/M/MV5BNzczNDNhYjctNWM2MC00Y2RlLWIyZDYtMTE1MjI0ZmVmYWY4XkEyXkFqcGc@._V1_.jpg', '2002-02-01', 'Hindi'),
+            ('Bhool Bhulaiyaa', 'horror', 'A psychiatrist tries to uncover the mystery behind a haunted palace.', 159, 'https://m.media-amazon.com/images/M/MV5BZDQ3OWE4YzgtNWU3Ni00MzI2LWJmNDYtMWE1YjkxZTA3NGU3XkEyXkFqcGc@._V1_.jpg', '2007-10-12', 'Hindi')
         `);
 
         // Insert Cast for Movies
@@ -153,7 +173,47 @@ async function initializeData() {
             (39, 'Vishnu Vishal'),
             (39, 'Amala Paul'),
             (40, 'Vidya Balan'),
-            (40, 'Nawazuddin Siddiqui')
+            (40, 'Nawazuddin Siddiqui'),
+            (41, 'Bradley Cooper'),
+            (41, 'Ed Helms'),
+            (42, 'Jonah Hill'),
+            (42, 'Michael Cera'),
+            (43, 'Naveen Polishetty'),
+            (43, 'Priyadarshi'),
+            (44, 'Venkatesh Daggubati'),
+            (44, 'Varun Tej'),
+            (45, 'Vihan Gowda'),
+            (45, 'Sonu Gowda'),
+            (46, 'Ganesh'),
+            (46, 'Anant Nag'),
+            (47, 'Vijay'),
+            (47, 'Jiiva'),
+            (48, 'Vijay Sethupathi'),
+            (48, 'Sanchita Shetty'),
+            (49, 'Aamir Khan'),
+            (49, 'R. Madhavan'),
+            (50, 'Sanjay Dutt'),
+            (50, 'Arshad Warsi'),
+            (51, 'Vera Farmiga'),
+            (51, 'Patrick Wilson'),
+            (52, 'Emily Blunt'),
+            (52, 'John Krasinski'),
+            (53, 'Madhavan'),
+            (53, 'Neetu Chandra'),
+            (54, 'Vijay Sethupathi'),
+            (54, 'Remya Nambeesan'),
+            (55, 'Ashwin Babu'),
+            (55, 'Dhanya Balakrishna'),
+            (56, 'Harshvardhan Rane'),
+            (56, 'Poorna'),
+            (57, 'Darshan Apoorva'),
+            (57, 'Krishna Prasad'),
+            (58, 'Patrick Wilson'),
+            (58, 'Rose Byrne'),
+            (59, 'Bipasha Basu'),
+            (59, 'Dino Morea'),
+            (60, 'Akshay Kumar'),
+            (60, 'Vidya Balan')
         `);
         await db.query(`
             INSERT INTO shows (movie_id, venue_id, start_time) VALUES
