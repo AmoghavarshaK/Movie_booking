@@ -39,10 +39,10 @@ async function initializeData() {
             ('Avatar', 'science fiction', 'A human falls for a Navi on Pandora.', 162, 'https://image.tmdb.org/t/p/original/kyeqWdyUXW608qlYkRqosgbbJyK.jpg', '2009-12-18', 'English'),
             ('Titanic', 'drama', 'A love story set on the Titanic.', 195, 'https://th.bing.com/th/id/OIP.OqH4vPLjPGrgruv5o8tdngHaJ4?rs=1&pid=ImgDetMain', '1997-12-19', 'English'),
             ('Joker', 'drama', 'The origin story of the Joker.', 122, 'https://image.tmdb.org/t/p/original/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg', '2019-10-04', 'English'),
-            ('KGF', 'action', 'The rise of Rocky in the underworld.', 155, 'https://image.tmdb.org/t/p/original/jMwUj3bNtEoZJtMlCVHFC9hWSL.jpg', '2018-12-21', 'Kannada'),
-            ('Vikram', 'thriller', 'A high-octane thriller.', 174, 'https://image.tmdb.org/t/p/original/8qkXH04tXTx0JiCfOebZ6PWBuvg.jpg', '2022-06-03', 'Tamil'),
+            ('KGF', 'action', 'The rise of Rocky in the underworld.', 155, 'https://m.media-amazon.com/images/M/MV5BM2M0YmIxNzItOWI4My00MmQzLWE0NGYtZTM3NjllNjIwZjc5XkEyXkFqcGc@._V1_.jpg', '2018-12-21', 'Kannada'),
+            ('Vikram', 'thriller', 'A high-octane thriller.', 174, 'https://i0.wp.com/moviegalleri.net/wp-content/uploads/2021/07/Vijay-Sethupathi-Kamal-Fahadh-Faasil-Vikram-Movie-First-Look-Poster-HD.jpg', '2022-06-03', 'Tamil'),
             ('RRR', 'action', 'A fictional story based on revolutionaries.', 187, 'https://image.tmdb.org/t/p/original/wE0I6efAW4cDDmZQWtwZMOW44EJ.jpg', '2022-03-25', 'Telugu'),
-            ('Drishyam', 'thriller', 'A gripping family drama with a thrilling twist.', 163, 'https://image.tmdb.org/t/p/original/xj7XL5SkW9cABuymq0skLZkEIfP.jpg', '2015-07-31', 'Hindi'),
+            ('Drishyam', 'thriller', 'A gripping family drama with a thrilling twist.', 163, 'https://m.media-amazon.com/images/I/714kDfwueCL._AC_UF894,1000_QL80_.jpg', '2015-07-31', 'Hindi'),
             ('Blade Runner 2049', 'science fiction', 'A young blade runner discovers a long-buried secret that leads him to track down former blade runner Rick Deckard, who has been missing for thirty years.', 164, 'https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg', '2017-10-06', 'English'),
             ('The Martian', 'science fiction', 'An astronaut, presumed dead, is stranded on Mars and must rely on his ingenuity to survive and signal Earth for rescue.', 144, 'https://image.tmdb.org/t/p/original/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg', '2015-10-02', 'English'),
             ('Arrival', 'science fiction', 'A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world.', 116, 'https://image.tmdb.org/t/p/original/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg', '2016-11-11', 'English')
