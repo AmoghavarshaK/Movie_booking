@@ -1,17 +1,15 @@
 const db = require("../dbconfig");
+
+
+// Render Home Page
 module.exports.renderHome = async (req, res) => {
     try {
-        // Fetch all movies and group by genre
-        const [movies] = await db.query(`
-            SELECT *
-            FROM movies
-            ORDER BY genre
-        `);
+        // Fetch movies sorted by genre
+        const [movies] = await db.query(`SELECT * FROM movies ORDER BY genre`);
 
-        // Fetch top 10 recently released movies
+        // Fetch top 10 recent movies
         const [recentMovies] = await db.query(`
-            SELECT * 
-            FROM movies 
+            SELECT * FROM movies 
             ORDER BY relese_date DESC 
             LIMIT 10
         `);
@@ -25,13 +23,38 @@ module.exports.renderHome = async (req, res) => {
             moviesByGenre[movie.genre].push(movie);
         });
 
-        res.render("common/home.ejs", { moviesByGenre, recentMovies });
+        res.render("common/home.ejs", { moviesByGenre, recentMovies, movies: null, query: "" });
     } catch (error) {
         console.error(error);
         req.flash("error", "Failed to load movies.");
         res.redirect("/");
     }
 };
+
+// Search Movies
+module.exports.searchMovies = async (req, res) => {
+    try {
+        const query = req.query.query; // Get search input
+        if (!query) {
+            req.flash("error", "Please enter a movie name.");
+            return res.redirect("/");
+        }
+
+        // Fetch movies matching search query
+        const [movies] = await db.query(`
+            SELECT * FROM movies 
+            WHERE title LIKE ? 
+            ORDER BY relese_date DESC
+        `, [`%${query}%`]);
+
+        res.render("common/home.ejs", { moviesByGenre: null, recentMovies: null, movies, query });
+    } catch (error) {
+        console.error(error);
+        req.flash("error", "Something went wrong while searching.");
+        res.redirect("/");
+    }
+};
+
 
 
 module.exports.getProfile = async (req, res) => {

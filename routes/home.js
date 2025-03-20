@@ -3,7 +3,8 @@ const router = express.Router();
 
 const { 
     renderHome,
-    getProfile
+    getProfile,
+    searchMovies
 
 } = require("../controllers/home.js");
 const { isLoggedIn } = require("../middleware.js");
@@ -13,6 +14,7 @@ router.get('/about' ,(req ,res)=>{
 });
 
 router.get('/profile', isLoggedIn , getProfile);
+router.get("/search", searchMovies);
 router.get('/' , renderHome);
 
 module.exports = router;
