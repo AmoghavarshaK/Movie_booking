@@ -12,7 +12,47 @@
             </div>
         <% } %>
 
-        <h1 class="text-3xl font-bold text-center mb-6">Now Showing</h1>
+        <!-- Recently Released Movies -->
+        <% if (recentMovies.length > 0) { %>
+            <h1 class="text-3xl font-bold text-center mb-6">🎬 Recently Released Movies</h1>
+            
+            <div class="relative w-full">
+                <!-- Swiper Carousel for Recent Movies -->
+                <div class="swiper" id="recent-movies-swiper">
+                    <div class="swiper-wrapper">
+                        <% recentMovies.forEach(movie => { %>
+                            <div class="swiper-slide">
+                                <a href="/movies/<%= movie.movie_id %>" 
+                                    class="block relative w-64 bg-transparent rounded-lg shadow-xl transition-transform duration-300 ease-out hover:scale-95 hover:shadow-2xl hover:rounded-lg">
+                                    <img src="<%= movie.poster_url %>" 
+                                        alt="<%= movie.title %>" 
+                                        class="w-full h-80 object-cover rounded-lg transition-opacity duration-300 hover:opacity-90">
+                                
+                                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 rounded-b-lg">
+                                        <h3 class="text-lg font-bold text-white drop-shadow-lg">
+                                            <%= movie.title %>
+                                        </h3>
+                                        <p class="text-sm text-white bg-black/50 px-2 py-1 inline-block rounded-md mt-1">
+                                            <%= new Date(movie.release_date).toDateString() %>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+
+                    <!-- Swiper Pagination -->
+                    <div class="swiper-pagination"></div>
+
+                    <!-- Swiper Navigation Buttons -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        <% } %>
+
+        <!-- Now Showing Section -->
+        <h1 class="text-3xl font-bold text-center mt-12 mb-6">Now Showing</h1>
 
         <% if (Object.keys(moviesByGenre).length === 0) { %>
             <p class="text-center text-gray-600">No movies available.</p>
@@ -24,24 +64,24 @@
                     <div class="relative w-full">
                         <!-- Movie Swiper Carousel -->
                         <div class="swiper" id="<%= genre %>-swiper">
-                            <div class="swiper-wrapper"> <!-- Removed 'flex justify-center' -->
+                            <div class="swiper-wrapper">
                                 <% moviesByGenre[genre].forEach(movie => { %>
-                                    <div class="swiper-slide"> <!-- No extra flex wrapping -->
+                                    <div class="swiper-slide">
                                         <a href="/movies/<%= movie.movie_id %>" 
                                             class="block relative w-64 bg-transparent rounded-lg shadow-xl transition-transform duration-300 ease-out hover:scale-95 hover:shadow-2xl hover:rounded-lg">
-                                             <img src="<%= movie.poster_url %>" 
-                                                  alt="<%= movie.title %>" 
-                                                  class="w-full h-80 object-cover rounded-lg transition-opacity duration-300 hover:opacity-90">
-                                         
-                                             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 rounded-b-lg">
-                                                 <h3 class="text-lg font-bold text-white drop-shadow-lg">
-                                                     <%= movie.title %>
-                                                 </h3>
-                                                 <p class="text-sm text-white bg-black/50 px-2 py-1 inline-block rounded-md mt-1">
-                                                     <%= movie.language %>
-                                                 </p>
-                                             </div>
-                                         </a>                                         
+                                            <img src="<%= movie.poster_url %>" 
+                                                alt="<%= movie.title %>" 
+                                                class="w-full h-80 object-cover rounded-lg transition-opacity duration-300 hover:opacity-90">
+                                        
+                                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 rounded-b-lg">
+                                                <h3 class="text-lg font-bold text-white drop-shadow-lg">
+                                                    <%= movie.title %>
+                                                </h3>
+                                                <p class="text-sm text-white bg-black/50 px-2 py-1 inline-block rounded-md mt-1">
+                                                    <%= movie.language %>
+                                                </p>
+                                            </div>
+                                        </a>                                         
                                     </div>
                                 <% }); %>
                             </div>
@@ -64,8 +104,8 @@
             document.querySelectorAll('.swiper').forEach(swiperElement => {
                 new Swiper(swiperElement, {
                     loop: true,  
-                    slidesPerView: "auto", // Auto fits available space
-                    spaceBetween: 15, // Reduce space for smaller screens
+                    slidesPerView: "auto", 
+                    spaceBetween: 15, 
                     navigation: {
                         nextEl: swiperElement.querySelector(".swiper-button-next"),
                         prevEl: swiperElement.querySelector(".swiper-button-prev"),
@@ -76,11 +116,11 @@
                         dynamicBullets: true,
                     },
                     breakpoints: {
-                        320: { slidesPerView: 1, spaceBetween: 10 },  // 1 movie on small screens
+                        320: { slidesPerView: 1, spaceBetween: 10 },  
                         480: { slidesPerView: 1.2, spaceBetween: 12 },
                         768: { slidesPerView: 2, spaceBetween: 15 },
                         1024: { slidesPerView: 3, spaceBetween: 20 },
-                        1300: { slidesPerView: 4, spaceBetween: 20 }  // 4 movies on large screens
+                        1300: { slidesPerView: 4, spaceBetween: 20 }  
                     }
                 });
             });
@@ -91,7 +131,7 @@
         /* Ensures images & slides fit well */
         .swiper-slide {
             max-width: 100%;
-            display: flex; /* Ensures proper alignment */
+            display: flex; 
             justify-content: center;
         }
     </style>

@@ -1,0 +1,172 @@
+<% layout("layouts/boilerplate") %>
+
+<body class="p-6">
+    <div class="container mx-auto">
+        <div class="mt-16 max-w-4xl mx-auto bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/50">
+            <div class="flex flex-col md:flex-row items-center md:items-start">
+                <!-- Movie Poster -->
+                <div class="w-full md:w-1/3">
+                    <img src="<%= movie.poster_url %>" alt="<%= movie.title %>" 
+                        class="w-full h-auto rounded-xl shadow-lg border-4 border-indigo-300">
+                </div>
+
+                <!-- Movie Details -->
+                <div class="md:w-2/3 md:pl-8 mt-6 md:mt-0 text-center md:text-left">
+                    <h1 class="text-4xl font-extrabold text-indigo-800"><%= movie.title %></h1>
+                    <div class="mt-2 text-gray-700 space-y-2">
+                        <p><span class="font-semibold text-indigo-700">Genre:</span> <%= movie.genre %></p>
+                        <p><span class="font-semibold text-indigo-700">Language:</span> <%= movie.language %></p>
+                        <p><span class="font-semibold text-indigo-700">Duration:</span> <%= movie.duration %> mins</p>
+                        <p>
+                            <span class="font-semibold text-indigo-700">Release Date:</span> 
+                            <%= new Date(movie.relese_date).toLocaleDateString("en-IN", { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                        </p>
+                    </div>
+                    <p class="text-gray-800 mt-4 leading-relaxed"><%= movie.description %></p>
+
+                    <!-- Movie Cast -->
+                    <% if (cast.length > 0) { %>
+                        <h2 class="text-2xl font-semibold mt-6 text-indigo-800">Cast</h2>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-3">
+                            <% cast.forEach(actor => { %>
+                                <div class="flex items-center space-x-3 bg-indigo-100/80 p-2 rounded-lg shadow border border-indigo-300">
+                                    <div class="w-10 h-10 bg-indigo-400 text-white rounded-full flex items-center justify-center">
+                                        <span class="text-lg font-semibold"><%= actor.cast_name[0] %></span>
+                                    </div>
+                                    <p class="text-indigo-800 font-medium"><%= actor.cast_name %></p>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Shows -->
+        <h2 class="text-2xl font-bold text-center mt-8">Available Shows</h2>
+
+        <% if (shows.length === 0) { %>
+            <p class="text-center text-gray-600">No shows available for this movie at the moment.</p>
+        <% } else { %>
+            <div class="flex justify-end gap-4 mb-4">
+                <!-- City Filter -->
+                <div class="flex flex-col">
+                    <label for="cityFilter" class="block text-sm font-semibold">City:</label>
+                    <select id="cityFilter" class="border px-2 py-1 rounded-md">
+                        <option value="">All Cities</option>
+                        <% const cityNames = [...new Set(shows.map(show => show.location.split(', ').pop()))]; %>
+                        <% cityNames.forEach(city => { %>
+                            <option value="<%= city %>"><%= city %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            
+                <!-- Date Filter -->
+                <div class="flex flex-col">
+                    <label for="dateFilter" class="block text-sm font-semibold">Date:</label>
+                    <input type="date" id="dateFilter" class="border px-2 py-1 rounded-md">
+                </div>
+            
+                <!-- Apply Filter Button (Aligned to Bottom) -->
+                <button onclick="filterShows()" 
+                        class="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white 
+                            px-4 py-1.5 rounded-lg shadow-[3px_3px_0px_rgba(30,30,30,0.9)] 
+                            transition-all duration-200 
+                            hover:from-indigo-700 hover:to-indigo-600 hover:shadow-[2px_2px_0px_rgba(30,30,30,0.8)] 
+                            active:shadow-none active:translate-x-0.5 active:translate-y-0.5 self-end">
+                    Apply Filter
+                </button>
+        
+            </div>
+            
+            
+
+            <!-- Show List -->
+            <div id="showList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% shows.forEach(show => { 
+                    const cityName = show.location.split(', ').pop(); // Extract city name
+                %>
+                <div class="bg-white shadow-md rounded-md p-4 show-item flex flex-col space-y-2"  
+                        data-city="<%= cityName %>"  
+                        data-date="<%= new Date(show.start_time).toLocaleDateString('en-CA') %>">  
+                
+                    <!-- Venue Name & Location -->
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <%= show.vname %> - <%= show.location %>
+                    </h3>  
+                
+                    <!-- Show Time -->
+                    <p class="text-gray-600">
+                        <strong>Time:</strong> <%= new Date(show.start_time).toLocaleString() %>
+                    </p>  
+                
+                    <!-- Show Price -->
+                    <p class="text-gray-600">
+                        <strong>Price:</strong> ₹<%= show.price.toFixed(2) %>
+                    </p>  
+                
+                    <!-- Book Now Button - Stays at the Bottom -->
+                    <div class="mt-auto">
+                        <a href="/movies/book/<%= show.show_id %>"  
+                            class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white 
+                                    px-4 py-2 rounded-lg shadow-[3px_3px_0px_rgba(30,30,30,0.5)] 
+                                    transition-all duration-200 
+                                    hover:from-blue-400 hover:to-indigo-600 hover:shadow-[2px_2px_0px_rgba(30,30,30,0.8)] 
+                                    active:shadow-none active:translate-x-0.5 active:translate-y-0.5">
+                            🎟 Book Now
+                        </a>  
+                    </div>  
+                
+                </div>
+           
+                <% }) %>
+            </div>
+
+            <!-- No Shows Message -->
+            <p id="noShowsMsg" class="text-center text-gray-600 mt-4 hidden">No shows available matching your criteria.</p>
+        <% } %>
+    </div>
+
+    <script>
+        function filterShows() {
+            let selectedCity = document.getElementById("cityFilter").value;
+            let selectedDate = document.getElementById("dateFilter").value;
+            let shows = document.querySelectorAll(".show-item");
+            let hasVisibleShows = false;
+
+            shows.forEach(show => {
+                let showCity = show.getAttribute("data-city");
+                let showDate = show.getAttribute("data-date");
+
+                let cityMatch = !selectedCity || showCity === selectedCity;
+                let dateMatch = !selectedDate || showDate === selectedDate;
+
+                if (cityMatch && dateMatch) {
+                    show.style.opacity = "0";
+                    show.style.transform = "scale(0.9)";
+                    setTimeout(() => {
+                        show.style.display = "block";
+                        show.style.opacity = "1";
+                        show.style.transform = "scale(1)";
+                    }, 200);
+                    hasVisibleShows = true;
+                } else {
+                    show.style.opacity = "0";
+                    show.style.transform = "scale(0.9)";
+                    setTimeout(() => {
+                        show.style.display = "none";
+                    }, 200);
+                }
+            });
+
+            // Show/hide "No shows available" message
+            document.getElementById("noShowsMsg").style.display = hasVisibleShows ? "none" : "block";
+        }
+    </script>
+
+    <style>
+        .show-item {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+    </style>
+</body>

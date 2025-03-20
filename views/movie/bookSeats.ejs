@@ -1,0 +1,123 @@
+<% layout("layouts/boilerplate") %>
+<body class=" flex flex-col items-center justify-center min-h-screen">
+
+    <div class="text-gray-700 flex flex-col items-center p-5">
+    
+        <h2 class="text-3xl font-bold mb-2 text-center">Book Seats for <%= show.movie_title %></h2>
+        <p class="text-lg mb-1">Venue: <%= show.venue_name %> - <%= show.location %></p>
+        <p class="text-lg mb-1">Showtime: <%= new Date(show.start_time).toLocaleString() %></p>
+        <p class="text-lg mb-4">Ticket Price: ₹<%= parseFloat(show.price).toFixed(2) %></p>
+
+        <!-- Glowing Screen Effect -->
+        <div class="relative w-full max-w-lg md:max-w-2xl h-10 bg-gray-800 text-center text-white font-bold rounded-lg mb-8 
+            shadow-lg shadow-blue-500/50 border border-gray-600 overflow-hidden before:content-[''] before:absolute before:inset-0 
+            before:bg-gradient-to-b before:from-white/10 before:to-transparent before:opacity-30">
+            <div class="absolute inset-0 bg-gray-800/50 backdrop-blur-md rounded-lg shadow-inner shadow-black/40"></div>
+            <span class="relative z-10 text-xl tracking-wider">SCREEN</span>
+        </div>
+
+
+        <form id="bookingForm" action="/movies/book-seats/<%= show.show_id %>" method="POST">
+            <div class="grid gap-2 bg-gray-800 p-5 rounded-lg shadow-lg shadow-blue-300/20">
+                <%  
+                    const rowLabels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").slice(0, Math.ceil(show.capacity / 10)); 
+                    for (let row = 0; row < rowLabels.length; row++) { 
+                %>
+                    <div class="flex justify-center gap-2">
+                        <% for (let col = 1; col <= 10; col++) { 
+                            let seatNo = `${rowLabels[row]}${col}`;
+                            let isBooked = bookedSeatNumbers.includes(seatNo);
+                        %>
+                            <div 
+                                class="seat w-10 h-10 flex items-center justify-center rounded-md cursor-pointer text-sm font-bold transition
+                                    <%= isBooked ? 'bg-red-600 cursor-not-allowed' : 'bg-gray-200 hover:bg-green-400' %>
+                                    shadow-md shadow-blue-300/20"
+                                data-seat="<%= seatNo %>"
+                            >
+                                <%= seatNo %>
+                            </div>
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+
+            <input type="hidden" name="seats" id="selectedSeats">
+            <button type="button" id="bookSeatsBtn" class="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg shadow-md shadow-blue-400/40">
+                Book Selected Seats
+            </button>
+        </form>
+
+        <!-- Payment Confirmation Modal -->
+        <div id="paymentModal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="bg-white text-black p-6 rounded-lg shadow-lg w-80">
+                <h2 class="text-xl font-bold mb-3 text-center">Confirm Your Booking</h2>
+                <p class="text-lg text-center">Seats Selected: <span id="selectedSeatsList"></span></p>
+                <p class="text-lg font-semibold text-center">Total Price: ₹<span id="totalPrice"></span></p>
+                <p class="text-sm text-gray-500 text-center mb-4">Proceed to payment to confirm your booking.</p>
+                <div class="flex justify-center gap-4">
+                    <button id="confirmPayment" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Proceed to Payment</button>
+                    <button id="cancelPayment" class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectedSeats = new Set();
+            const seatPrice = <%= show.price %>; // Ticket price from server
+            const bookSeatsBtn = document.getElementById("bookSeatsBtn");
+            const paymentModal = document.getElementById("paymentModal");
+            const confirmPayment = document.getElementById("confirmPayment");
+            const cancelPayment = document.getElementById("cancelPayment");
+            const selectedSeatsList = document.getElementById("selectedSeatsList");
+            const totalPriceElement = document.getElementById("totalPrice");
+
+            document.querySelectorAll(".seat:not(.bg-red-600)").forEach(seat => {
+                seat.addEventListener("click", function () {
+                    const seatNo = this.dataset.seat;
+
+                    if (selectedSeats.has(seatNo)) {
+                        selectedSeats.delete(seatNo);
+                        this.classList.remove("bg-green-500");
+                        this.classList.add("bg-gray-200");
+                    } else {
+                        selectedSeats.add(seatNo);
+                        this.classList.remove("bg-gray-200");
+                        this.classList.add("bg-green-500");
+                    }
+
+                    document.getElementById("selectedSeats").value = JSON.stringify([...selectedSeats]);
+                });
+            });
+
+            bookSeatsBtn.addEventListener("click", () => {
+                if (selectedSeats.size === 0) {
+                    alert("Please select at least one seat.");
+                    return;
+                }
+
+                const totalPrice = selectedSeats.size * seatPrice;
+
+                // Update modal content
+                selectedSeatsList.textContent = [...selectedSeats].join(", ");
+                totalPriceElement.textContent = totalPrice.toFixed(2);
+
+                // Show the payment modal
+                paymentModal.classList.remove("hidden");
+            });
+
+            cancelPayment.addEventListener("click", () => {
+                // Hide modal if user cancels
+                paymentModal.classList.add("hidden");
+            });
+
+            confirmPayment.addEventListener("click", () => {
+                // Submit form on payment confirmation
+                document.getElementById("bookingForm").submit();
+            });
+        });
+    </script>
+
+</body>

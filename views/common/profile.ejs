@@ -1,4 +1,5 @@
 <% layout("layouts/boilerplate") %>
+
 <main class="flex-1 flex flex-col md:flex-row items-start justify-center px-4 mt-10">
     <!-- Left Side (Profile) -->
     <div class="w-full md:max-w-sm">
@@ -33,12 +34,52 @@
         </div>
     </div>
 
-    <!-- Right Side (Empty for Future Usage) -->
-    <div class="flex-1 ml-6 hidden md:block">
-        <!-- Future content goes here -->
-        <div class="text-black-400 text-center">
-            🚀 Your booked tickets will appear here!
-        </div>
+    <!-- Right Side (Bookings Section) -->
+    <div class="flex-1 ml-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">🎟 Your Bookings</h2>
+
+        <% 
+            const now = new Date();
+            const pastBookings = bookings.filter(booking => new Date(booking.start_time) < now);
+            const upcomingBookings = bookings.filter(booking => new Date(booking.start_time) >= now);
+        %>
+
+        <!-- Upcoming Bookings -->
+        <h3 class="text-xl font-semibold text-green-600 mb-2">📅 Upcoming Bookings</h3>
+        <% if (upcomingBookings.length === 0) { %>
+            <p class="text-gray-500 text-center">No upcoming bookings.</p>
+        <% } else { %>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <% upcomingBookings.forEach(booking => { %>
+                    <a href="/movies/ticket/<%= user.id %>/<%= booking.show_id %>" 
+                       class="block bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition border-2 border-blue-500">
+                        <h3 class="text-lg font-semibold text-gray-800"><%= booking.movie_title %></h3>
+                        <p class="text-gray-600"><strong>Venue:</strong> <%= booking.venue_name %> - <%= booking.location %></p>
+                        <p class="text-gray-600"><strong>Showtime:</strong> <%= new Date(booking.start_time).toLocaleString() %></p>
+                        <p class="text-gray-600"><strong>Seats:</strong> <%= booking.seats ? booking.seats.split(", ").join(", ") : "No seats booked" %></p>
+                        <p class="text-gray-600 font-semibold"><strong>Total Price:</strong> ₹<%= (booking.seats ? booking.seats.split(", ").length * booking.price : 0).toFixed(2) %></p>
+                    </a>
+                <% }) %>
+            </div>
+        <% } %>
+
+        <!-- Past Bookings -->
+        <h3 class="text-xl font-semibold text-red-600 mt-6 mb-2">⏳ Past Bookings</h3>
+        <% if (pastBookings.length === 0) { %>
+            <p class="text-gray-500 text-center">No past bookings.</p>
+        <% } else { %>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <% pastBookings.forEach(booking => { %>
+                    <a href="/movies/ticket/<%= user.id %>/<%= booking.show_id %>" 
+                       class="block bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition border-2 border-gray-500">
+                        <h3 class="text-lg font-semibold text-gray-800"><%= booking.movie_title %></h3>
+                        <p class="text-gray-600"><strong>Venue:</strong> <%= booking.venue_name %> - <%= booking.location %></p>
+                        <p class="text-gray-600"><strong>Showtime:</strong> <%= new Date(booking.start_time).toLocaleString() %></p>
+                        <p class="text-gray-600"><strong>Seats:</strong> <%= booking.seats ? booking.seats.split(", ").join(", ") : "No seats booked" %></p>
+                        <p class="text-gray-600 font-semibold"><strong>Total Price:</strong> ₹<%= (booking.seats ? booking.seats.split(", ").length * booking.price : 0).toFixed(2) %></p>
+                    </a>
+                <% }) %>
+            </div>
+        <% } %>
     </div>
 </main>
-

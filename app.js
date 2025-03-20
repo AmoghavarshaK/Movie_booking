@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 const userRouter = require("./routes/user")
 const adminRouter = require("./routes/admin")
 const homeRouter = require("./routes/home")
+const movieRouter = require("./routes/movie")
 
 const session = require('express-session');
 const flash = require('connect-flash')
@@ -74,19 +75,9 @@ app.use((req,res,next)=>{
 app.use('/admin',adminRouter)
 app.use('/',userRouter)
 
-app.get('/about' ,(req ,res)=>{
-    res.render("./common/about.ejs") 
-});
 
-app.get('/profile', (req, res) => {
-    if (!req.user) {
-        req.flash("error", "You need to log in first.");
-        return res.redirect("/login");
-    }
 
-    res.render("./common/profile", { user: req.user });
-});
-
+app.use('/movies' , movieRouter);
 
 app.use('/',homeRouter);
 
