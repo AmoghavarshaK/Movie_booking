@@ -34,7 +34,7 @@
                                     <h3 class="text-lg font-extrabold text-gray-900 tracking-wide"><%= movie.title %></h3>
                                     <p class="text-sm text-gray-700 font-medium mt-1">🎭 Genre: <span class="font-semibold"><%= movie.genre %></span></p>
                                     <p class="text-sm text-gray-700 font-medium">🗣 Language: <span class="font-semibold"><%= movie.language %></span></p>
-                                    <p class="text-sm text-gray-500 mt-2">📅 Released: <%= new Date(movie.release_date).toDateString() %></p>
+                                    <p class="text-sm text-gray-500 mt-2">📅 Released: <%= new Date(movie.relese_date).toDateString() %></p>
                                 </div>
                             </a>
                         </div>
@@ -71,7 +71,7 @@
                                                 <%= movie.title %>
                                             </h3>
                                             <p class="text-sm text-white bg-black/50 px-2 py-1 inline-block rounded-md mt-1">
-                                                <%= new Date(movie.release_date).toDateString() %>
+                                                <%= new Date(movie.relese_date).toDateString() %>
                                             </p>
                                         </div>
                                     </a>
