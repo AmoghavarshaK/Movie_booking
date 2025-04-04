@@ -6,7 +6,7 @@ module.exports.addVenue = async (req, res) => {
         const { vname, location, capacity } = req.body;
         if (!vname || !location || !capacity) {
             req.flash("error", "All fields are required");
-            return res.redirect("/admin/venues");
+            return res.redirect("/admin/venues/add");
         }
 
         const [venueResult] = await db.query(
@@ -15,11 +15,11 @@ module.exports.addVenue = async (req, res) => {
         );
 
         req.flash("success", "Venue added successfully!");
-        res.redirect("/admin/venues");
+        res.redirect("/admin/dashboard");
     } catch (error) {
         console.error(error);
         req.flash("error", "Internal server error");
-        res.redirect("/admin/venues");
+        res.redirect("/admin/dashboard");
     }
 };
 
@@ -53,7 +53,7 @@ module.exports.addMovie = async (req, res) => {
         }
 
         req.flash("success", "Movie and cast added successfully!");
-        return res.redirect("/admin/movies");
+        return res.redirect("/admin/dashboard");
     } catch (error) {
         console.error(error);
         req.flash("error", "Internal server error");
