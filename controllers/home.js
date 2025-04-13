@@ -61,29 +61,14 @@ module.exports.getProfile = async (req, res) => {
     try {
         const user_id = req.user.id;
 
-        // Fetch bookings with movie and venue details
-        const [bookings] = await db.query(`
-            SELECT 
-                b.show_id, 
-                m.title AS movie_title, 
-                v.vname AS venue_name, 
-                v.location, 
-                s.start_time, 
-                s.price, 
-                GROUP_CONCAT(bs.seat_no ORDER BY bs.seat_no) AS seats
-            FROM bookings b
-            JOIN shows s ON b.show_id = s.show_id
-            JOIN movies m ON s.movie_id = m.movie_id
-            JOIN venues v ON s.venue_id = v.venue_id
-            LEFT JOIN booked_seats bs ON b.user_id = bs.user_id AND b.show_id = bs.show_id
-            WHERE b.user_id = ?
-            GROUP BY b.show_id
-        `, [user_id]);
+        const [bookings] = await db.query(`CALL get_user_profile_bookings(?)`, [user_id]);
 
-        res.render("./common/profile", { user: req.user, bookings });
+        // Note: MySQL stored procedures return results in [0], so you need bookings[0]
+        res.render("./common/profile", { user: req.user, bookings: bookings[0] });
     } catch (error) {
         console.error("Error fetching profile:", error);
         req.flash("error", "Could not load profile.");
         res.redirect("/");
     }
 };
+

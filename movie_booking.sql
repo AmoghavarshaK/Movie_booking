@@ -62,4 +62,49 @@ CREATE TABLE booked_seats (
     FOREIGN KEY (user_id, show_id) REFERENCES bookings(user_id, show_id) ON DELETE CASCADE
 );
 
+CREATE TABLE booking_log (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    show_id INT,
+    action VARCHAR(50),
+    action_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
+DELIMITER //
+
+CREATE TRIGGER after_booking_insert
+AFTER INSERT ON bookings
+FOR EACH ROW
+BEGIN
+    INSERT INTO booking_log (user_id, show_id, action)
+    VALUES (NEW.user_id, NEW.show_id, 'Booking Made');
+END //
+
+DELIMITER ;
+
+SELECT * FROM booking_log;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE get_user_profile_bookings(IN userId INT)
+BEGIN
+    SELECT 
+        b.show_id, 
+        m.title AS movie_title, 
+        v.vname AS venue_name, 
+        v.location, 
+        s.start_time, 
+        s.price, 
+        GROUP_CONCAT(bs.seat_no ORDER BY bs.seat_no) AS seats
+    FROM bookings b
+    JOIN shows s ON b.show_id = s.show_id
+    JOIN movies m ON s.movie_id = m.movie_id
+    JOIN venues v ON s.venue_id = v.venue_id
+    LEFT JOIN booked_seats bs ON b.user_id = bs.user_id AND b.show_id = bs.show_id
+    WHERE b.user_id = userId
+    GROUP BY b.show_id;
+END //
+
+DELIMITER ;
